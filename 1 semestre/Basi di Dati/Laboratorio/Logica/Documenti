@@ -1,0 +1,65 @@
+^a^     a chiave primaria                       |
+§a§     a chiave esterna                        |
+!a!     a chiave di unique                      |
+________________________________________________|
+
+DOCUMENTO(^protocollo^ ,data_riferimento, data_archiviazione, url, §tipologia§, nome_doc, §oggetto§, §ente§)
+OGGETTO(^id_oggetto^, nome_oggetto)
+CATEGORIA(^id_categoria^, nome_categoria)
+ENTE(^id_ente^, nome_ente)
+TIPOLOGIA(^id_type^, name_type)
+
+documenta(§^ protocollo, id_oggetto ^§)   --is_document_of
+emesso_da(§^ protocollo ^, id_ente §)
+is_a(§^ id_oggetto^, id_categoria §)
+
+CREATE ROLE proprietario WITH CREATEDB LOGIN PASSWORD
+CREATE DATABASE organizer WITH OWNER proprietario
+CREATE SCHEMA organizerDoc;
+
+CREATE TABLE documento(
+protocollo serial PRIMARY KEY,
+data_riferimento date NOT NULL,
+data_archiviazione date NOT NULL
+);
+
+CREATE TABLE oggetto(
+    id_oggetto serial PRIMARY KEY,
+    nome_oggetto varchar(50) NOT NULL
+);
+
+CREATE TABLE organizerdoc.documento(
+protocollo serial PRIMARY KEY,
+data_riferimento date NOT NULL,
+data_archiviazione date NOT NULL
+);
+
+CREATE TABLE categoria(
+    id_categoria serial PRIMARY KEY,
+    nome_categoria varchar(50) NOT NULL
+);
+
+CREATE TABLE ente(
+    id_ente serial PRIMARY KEY,
+    nome_ente varchar(50) NOT NULL
+);
+
+CREATE TABLE tipologia(
+    id_type serial PRIMARY KEY,
+    name_type varchar(50) NOT NULL
+);
+
+CREATE TABLE is_document_of(
+    protocollo integer REFERENCES documento(protocollo) ON UPDATE CASCADE ON DELETE CASCADE,
+    id_oggetto integer REFERENCES oggetto(id_oggetto) ON UPDATE CASCADE ON DELETE CASCADE, -- quando viene cancellato un oggetto viene cancellato anche il riferimetno a tutti i suoi doc
+    PRIMARY KEY(protocollo,id_oggetto)
+);
+
+ALTER TABLE documento ADD COLUMN tipologia integer REFERENCES tipologia(id_type) ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE documento ADD COLUMN oggetto integer REFERENCES oggetto(id_oggetto) ON UPDATE NO ACTION ON DELETE NO ACTION; 
+DROP TABLE is_document_of;
+
+ALTER TABLE documento ADD COLUMN ente integer REFERENCES ente(id_ente) ON UPDATE NO ACTION ON DELETE NO ACTION; 
+
+ALTER TABLE oggetto ADD COLUMN categoria integer REFERENCES categoria(id_categoria) ON UPDATE CASCADE ON DELETE NO ACTION; 

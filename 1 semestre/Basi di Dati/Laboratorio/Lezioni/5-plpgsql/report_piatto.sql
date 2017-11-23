@@ -1,0 +1,11 @@
+-- report_ricetta
+-- Data una ricetta restituisce una stringa formattata con il contenuto della ricetta
+-- input: il titolo di una ricetta
+-- output: una stringa con la descrizione della ricetta e della sua composizione
+-- Esempio di output per la ricetta dell'insalata di polpo:
+--  Insalata di polpo (preparazione in 15 minuti)
+--         400.00 grammi di polpo               
+--         400.00 grammi di patate              
+--         100.00 grammi di prezzemolo          
+--         8.00 cucchiai di olio                
+--         1.00 pizzico di sale              

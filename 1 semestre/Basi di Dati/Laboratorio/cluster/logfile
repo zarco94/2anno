@@ -1,0 +1,13 @@
+2017-10-26 21:39:36.064 CEST [3736] LOG:  listening on IPv6 address "::1", port 5432
+2017-10-26 21:39:36.064 CEST [3736] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2017-10-26 21:39:36.065 CEST [3736] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2017-10-26 21:39:36.077 CEST [3737] LOG:  database system was shut down at 2017-10-26 21:17:46 CEST
+2017-10-26 21:39:36.081 CEST [3736] LOG:  database system is ready to accept connections
+2017-10-26 21:41:34.227 CEST [3758] FATAL:  role "postgres" does not exist
+2017-10-26 21:43:30.190 CEST [3774] FATAL:  database "du" does not exist
+2017-10-26 21:43:44.792 CEST [3780] FATAL:  role "du" does not exist
+2017-10-26 22:33:23.906 CEST [3736] LOG:  received fast shutdown request
+2017-10-26 22:33:23.909 CEST [3736] LOG:  aborting any active transactions
+2017-10-26 22:33:23.910 CEST [3736] LOG:  worker process: logical replication launcher (PID 3743) exited with exit code 1
+2017-10-26 22:33:23.911 CEST [3738] LOG:  shutting down
+2017-10-26 22:33:23.919 CEST [3736] LOG:  database system is shut down
